@@ -27,7 +27,7 @@ public class GameCanvas extends JComponent {
 		g.setColor(Color.black);
 		g.fillRect(0, 0, getWidth(), getHeight());
 		g.setColor(Color.white);
-		game.render(new org.nc.engine.Graphics(g));
+		game.render(new org.nc.engine.Graphics(g, gc));
 		if (gc.isDebugVis) {
 			f = g.getFont();
 			Font debugfont = new Font("Calibri", Font.PLAIN, 15);

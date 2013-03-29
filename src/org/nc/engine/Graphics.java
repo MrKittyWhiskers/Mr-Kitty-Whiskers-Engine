@@ -14,9 +14,11 @@ import javax.imageio.ImageIO;
 public class Graphics {
 
 	java.awt.Graphics g;
+	GameContainer gc;
 
-	public Graphics(java.awt.Graphics g) {
+	public Graphics(java.awt.Graphics g, GameContainer gc) {
 		this.g = g;
+		this.gc = gc;
 	}
 
 	public void setColor(Color c) {
