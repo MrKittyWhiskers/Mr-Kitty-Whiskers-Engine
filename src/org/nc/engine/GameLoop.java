@@ -13,7 +13,8 @@ public class GameLoop extends Thread {
 	public GameLoop(Game game, GameCanvas canvas) {
 		this.game = game;
 		this.canvas = canvas;
-
+		game.init();
+		
 		timer.schedule(new TimerTask() {
 			@Override
 			public void run() {
@@ -32,11 +33,5 @@ public class GameLoop extends Thread {
 			lastLoopTime = System.currentTimeMillis();
 			game.deltapro = (int) delta;
 		}
-	}
-
-	@Override
-	public void run() {
-		game.init();
-
 	}
 }
