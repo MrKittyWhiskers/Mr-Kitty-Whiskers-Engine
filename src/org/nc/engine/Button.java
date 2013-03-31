@@ -21,8 +21,8 @@ public class Button {
 	public Button(String buttonLoc, int x, int y, Game game, int Width, int Height, Input input, String text) {
 		this.x = x;
 		this.y = y;
-		this.width = 250;
-		this.height = 70;
+		this.width = Width;
+		this.height = Height;
 		this.game = game;
 		this.input = input;
 		this.text = text;
