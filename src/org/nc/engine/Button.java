@@ -16,8 +16,9 @@ public class Button {
 	String text;
 	AffineTransform affinetransform = new AffineTransform();
 	FontRenderContext frc = new FontRenderContext(affinetransform, true, true);
+	String buttonLoc;
 
-	public Button(int x, int y, Game game, Input input, String text) {
+	public Button(String buttonLoc, int x, int y, Game game, int Width, int Height, Input input, String text) {
 		this.x = x;
 		this.y = y;
 		this.width = 250;
@@ -25,14 +26,14 @@ public class Button {
 		this.game = game;
 		this.input = input;
 		this.text = text;
+		this.buttonLoc = buttonLoc;
 	}
 
 	public void render(Graphics g) {
 		int textWidth = (int) (g.currentFont().getStringBounds(text, frc).getWidth());
 		int textHeight = (int) (g.currentFont().getStringBounds(text, frc).getHeight());
-		g.drawImage(game.getButtonLoc(), x, y);
+		g.drawImage(buttonLoc, x, y);
 		g.drawString(text, x + width / 2 - textWidth / 2, y + (height / 2 + textHeight / 4), g.currentFont());
-		// draw text and crap
 	}
 
 	public boolean isClicked() {

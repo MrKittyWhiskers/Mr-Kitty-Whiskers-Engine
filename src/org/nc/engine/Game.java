@@ -13,8 +13,6 @@ public abstract class Game {
 	protected int mouseXpro;
 	protected int mouseYpro;
 	protected int deltapro = 0;
-	private String buttonLoc = "res/button.png";
-	private String texturesLoc = "res/textures.png";
 	protected String stateName = "";
 	protected String debuginfo = "";
 	
@@ -28,14 +26,6 @@ public abstract class Game {
 
 	public int delta() {
 		return deltapro;
-	}
-
-	public String getButtonLoc() {
-		return buttonLoc;
-	}
-	
-	public String getTextureLoc() {
-		return texturesLoc;
 	}
 
 	public String getTitle() {
