@@ -8,7 +8,6 @@ import java.awt.Shape;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-
 import javax.imageio.ImageIO;
 
 public class Graphics {
@@ -49,7 +48,7 @@ public class Graphics {
 	public void drawImage(Image image, float x, float y) {
 		g.drawImage(image, (int) x, (int) y, null);
 	}
-
+	
 	public void drawShape(Shape shape) {
 		Graphics2D g2 = (Graphics2D) g;
 		g2.draw(shape);

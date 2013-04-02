@@ -32,6 +32,7 @@ public class GameContainer {
 			frame.addKeyListener(input);
 		} else {
 			g.over = true;
+			g.end();
 			canvas.game = game;
 		}
 		game.width = frame.getWidth();

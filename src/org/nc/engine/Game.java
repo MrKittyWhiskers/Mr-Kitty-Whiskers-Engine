@@ -56,4 +56,12 @@ public abstract class Game {
 	public boolean isOver() {
 		return over;
 	}
+	
+	protected void end() {
+		try {
+			this.finalize();
+		} catch (Throwable e) {
+			e.printStackTrace();
+		}
+	}
 }
