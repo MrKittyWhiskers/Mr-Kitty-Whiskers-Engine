@@ -27,7 +27,6 @@ public class GameContainer {
 	 */
 	public void addState(Game state) {
 		states.put(new Integer(state.getID()), state);
-		state.init();
 	}
 
 	/**
@@ -67,6 +66,12 @@ public class GameContainer {
 			currentState.over = false;
 			width = frame.getWidth();
 			height = frame.getHeight();
+		}
+	}
+	
+	public void init(){
+		for (Game g : states.values()) {
+			g.init();
 		}
 	}
 
