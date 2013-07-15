@@ -32,14 +32,14 @@ public class Button {
 //		this.image = Toolkit.getDefaultToolkit().getImage(buttonLoc);
 		try {
 			this.image = ImageIO.read(new File(buttonLoc));
+			width = image.getWidth(null);
+			height = image.getHeight(null);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
 
 	public void render(Graphics g) {
-		width = image.getWidth(null);
-		height = image.getHeight(null);
 		int textWidth = (int) (g.currentFont().getStringBounds(text, frc).getWidth());
 		int textHeight = (int) (g.currentFont().getStringBounds(text, frc).getHeight());
 		g.drawImage(image, x, y);
