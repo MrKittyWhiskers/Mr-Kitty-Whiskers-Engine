@@ -68,7 +68,10 @@ public class Graphics {
 	}
 	
 	public void drawResizeImage(BufferedImage image, int x, int y, int width, int height) {
-		((Graphics2D) g).drawImage(image, x, y, width, height, null);
+		try {
+			g.drawImage(image.getScaledInstance(width, height, Image.SCALE_AREA_AVERAGING), x, y, null);
+		}catch(NullPointerException e) {
+		}
 	}
 
 	public java.awt.Graphics getGraphics() {

@@ -35,10 +35,6 @@ public class GameCanvas extends JComponent {
 		g.fillRect(0, 0, getWidth(), getHeight());
 		g.setColor(Color.white);
 		game.render(myGraphics);
-		if (gc.isDebugVis) {
-			Font debugfont = new Font("Calibri", Font.PLAIN, 15);
-			myGraphics.drawString(game.debuginfo, 0, 10, debugfont);
-		}
 	}
 
 	public void dispose() {

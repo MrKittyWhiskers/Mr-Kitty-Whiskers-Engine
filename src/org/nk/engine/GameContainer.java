@@ -1,6 +1,5 @@
 package org.nk.engine;
 
-import java.awt.Cursor;
 import java.util.HashMap;
 import javax.swing.JFrame;
 

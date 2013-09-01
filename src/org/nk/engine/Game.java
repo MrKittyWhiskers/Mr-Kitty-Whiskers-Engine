@@ -19,7 +19,7 @@ public abstract class Game {
 	int delta = 0;
 	float interpolation = 0;
 	private String stateName = "";
-	String debuginfo = "";
+	public String debuginfo = "";
 	
 	public int mouseX() {
 		return mouseXpro;
