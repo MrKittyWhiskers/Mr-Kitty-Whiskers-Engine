@@ -1,11 +1,12 @@
 package org.nk.engine;
 
+import java.lang.Thread.UncaughtExceptionHandler;
 import java.util.HashMap;
 import javax.swing.JFrame;
 
 public class GameContainer {
 
-	public JFrame frame;
+	static JFrame frame;
 	private static String name;
 	public Game currentState;
 	private Game nextState;
@@ -15,6 +16,11 @@ public class GameContainer {
 	public boolean isDebugVis;
 	Input input;
 	HashMap<Integer, Game> states = new HashMap<Integer, Game>();
+	private boolean isErrorScreenEnabled = true;
+	
+	private final UncaughtExceptionHandler defUEH = Thread.getDefaultUncaughtExceptionHandler(); 
+	private final UncaughtExceptionHandler errorScreen = new ErrorScreen(); 
+	static String errorScreenText;
 
 	public void initInput(Input input) {
 		this.input = input;
@@ -35,7 +41,7 @@ public class GameContainer {
 	 *            (Needs to be the same as the number that is returned from getID() in the Game class)
 	 */
 
-	GameCanvas canvas;
+	static GameCanvas canvas;
 	public void enterState(int id) {
 		nextState = getState(id);
 		if (nextState == null) {
@@ -110,4 +116,18 @@ public class GameContainer {
 		loop.paused = paused;
 	}
 
+	public boolean isErrorScreenEnabled() {
+		return isErrorScreenEnabled;
+	}
+
+	public void setErrorScreenEnabled(boolean isErrorScreenEnabled, String customText) {
+		this.isErrorScreenEnabled = isErrorScreenEnabled;
+		
+		if (isErrorScreenEnabled()) {
+			Thread.setDefaultUncaughtExceptionHandler(errorScreen);
+			errorScreenText = customText;
+		}	else {
+			Thread.setDefaultUncaughtExceptionHandler(defUEH);
+		}
+	}
 }
