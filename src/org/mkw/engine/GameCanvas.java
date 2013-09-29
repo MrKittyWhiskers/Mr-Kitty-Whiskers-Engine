@@ -1,7 +1,6 @@
-package org.nk.engine;
+package org.mkw.engine;
 
 import java.awt.Color;
-import java.awt.Font;
 import java.awt.Graphics;
 
 import javax.swing.JComponent;
@@ -12,7 +11,7 @@ public class GameCanvas extends JComponent {
 	Game game;
 	private GameContainer gc;
 	Graphics g;
-	org.nk.engine.Graphics myGraphics;
+	org.mkw.engine.Graphics myGraphics;
 
 	public GameCanvas(Game game, Input input, GameContainer gc) {
 		this.game = game;
@@ -29,7 +28,7 @@ public class GameCanvas extends JComponent {
 	public void paintComponent(Graphics g) {
 		if (g != null) {
 			this.g = g;
-			myGraphics = new org.nk.engine.Graphics(g, gc);
+			myGraphics = new org.mkw.engine.Graphics(g, gc);
 		}
 		g.setColor(Color.black);
 		g.fillRect(0, 0, getWidth(), getHeight());

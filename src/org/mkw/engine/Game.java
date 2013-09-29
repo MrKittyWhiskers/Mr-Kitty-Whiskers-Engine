@@ -1,4 +1,4 @@
-package org.nk.engine;
+package org.mkw.engine;
 
 import java.awt.event.KeyEvent;
 
@@ -60,12 +60,8 @@ public abstract class Game {
 		return over;
 	}
 	
-	public boolean isPaused() {
-		return gc.loop.paused;
-	}
-
-	public void setPaused(boolean paused) {
-		gc.loop.paused = paused;
+	public boolean isRunning() {
+		return gc.loop.running;
 	}
 
 	protected void end() {

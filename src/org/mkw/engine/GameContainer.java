@@ -1,4 +1,4 @@
-package org.nk.engine;
+package org.mkw.engine;
 
 import java.lang.Thread.UncaughtExceptionHandler;
 import java.util.HashMap;
@@ -12,14 +12,16 @@ public class GameContainer {
 	private Game nextState;
 	private int width = 0;
 	private int height = 0;
+	private int xLoc = 10;
+	private int yLoc = 10;
 	GameLoop loop;
 	public boolean isDebugVis;
 	Input input;
 	HashMap<Integer, Game> states = new HashMap<Integer, Game>();
 	private boolean isErrorScreenEnabled = true;
-	
-	private final UncaughtExceptionHandler defUEH = Thread.getDefaultUncaughtExceptionHandler(); 
-	private final UncaughtExceptionHandler errorScreen = new ErrorScreen(); 
+
+	private final UncaughtExceptionHandler defUEH = Thread.getDefaultUncaughtExceptionHandler();
+	private final UncaughtExceptionHandler errorScreen = new ErrorScreen();
 	static String errorScreenText;
 
 	public void initInput(Input input) {
@@ -38,10 +40,12 @@ public class GameContainer {
 	 * Changes the state. The state will then update and render.
 	 * 
 	 * @param id
-	 *            (Needs to be the same as the number that is returned from getID() in the Game class)
+	 *            (Needs to be the same as the number that is returned from
+	 *            getID() in the Game class)
 	 */
 
 	static GameCanvas canvas;
+
 	public void enterState(int id) {
 		nextState = getState(id);
 		if (nextState == null) {
@@ -51,6 +55,7 @@ public class GameContainer {
 			if (currentState == null) {
 				frame = new JFrame(getName());
 				frame.setSize(width, height);
+				frame.setLocation(xLoc, yLoc);
 				frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 				frame.setResizable(false);
 				frame.setVisible(true);
@@ -59,8 +64,7 @@ public class GameContainer {
 				canvas = new GameCanvas(nextState, input, this);
 				frame.add(canvas);
 				loop = new GameLoop(this, nextState, canvas);
-				Thread l = new Thread(loop);
-				l.start();
+				loop.start("GAMECONTAINER");
 			} else {
 				canvas.game = nextState;
 				currentState.over = true;
@@ -71,10 +75,12 @@ public class GameContainer {
 			currentState.over = false;
 			width = frame.getWidth();
 			height = frame.getHeight();
+			xLoc = frame.getX();
+			yLoc = frame.getY();
 		}
 	}
-	
-	public void init(){
+
+	public void init() {
 		for (Game g : states.values()) {
 			g.init();
 		}
@@ -93,6 +99,11 @@ public class GameContainer {
 		this.height = height;
 	}
 
+	protected void setLocation(int x, int y) {
+		xLoc = x;
+		yLoc = y;
+	}
+
 	public int getWidth() {
 		return width;
 	}
@@ -108,12 +119,16 @@ public class GameContainer {
 	public static void setName(String s) {
 		name = s;
 	}
-	
+
 	public void setCursorVisible(boolean CusVis) {
 	}
-	
-	public void setPaused(boolean paused) {
-		loop.paused = paused;
+
+	public void setRunning(boolean bool) {
+		if (bool == true) {
+			loop.start("THREAD");
+		} else {
+			loop.stop();
+		}
 	}
 
 	public boolean isErrorScreenEnabled() {
@@ -122,12 +137,16 @@ public class GameContainer {
 
 	public void setErrorScreenEnabled(boolean isErrorScreenEnabled, String customText) {
 		this.isErrorScreenEnabled = isErrorScreenEnabled;
-		
+
 		if (isErrorScreenEnabled()) {
 			Thread.setDefaultUncaughtExceptionHandler(errorScreen);
 			errorScreenText = customText;
-		}	else {
+		} else {
 			Thread.setDefaultUncaughtExceptionHandler(defUEH);
 		}
+	}
+
+	public void repaint() {
+		canvas.repaint();
 	}
 }

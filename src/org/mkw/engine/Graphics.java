@@ -1,4 +1,4 @@
-package org.nk.engine;
+package org.mkw.engine;
 
 import java.awt.Color;
 import java.awt.Font;
@@ -41,7 +41,7 @@ public class Graphics {
 		}
 	}
 
-	public void drawImage(BufferedImage image, int x, int y) {
+	public void drawImage(Image image, int x, int y) {
 		g.drawImage(image, x, y, null);
 	}
 
@@ -61,17 +61,6 @@ public class Graphics {
 	public Font currentFont() {
 		Font font = g.getFont();
 		return font;
-	}
-
-	public void drawSubImage(BufferedImage subimage, int x, int y, int size, int size2) {
-		g.drawImage(subimage, x, y, size, size2, null);
-	}
-	
-	public void drawResizeImage(BufferedImage image, int x, int y, int width, int height) {
-		try {
-			g.drawImage(image.getScaledInstance(width, height, Image.SCALE_AREA_AVERAGING), x, y, null);
-		}catch(NullPointerException e) {
-		}
 	}
 
 	public java.awt.Graphics getGraphics() {
